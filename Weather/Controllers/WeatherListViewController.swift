@@ -13,7 +13,14 @@ class WeatherListViewController: UIViewController {
     //MARK: Outlets & Actions
     @IBOutlet weak var tableView: UITableView!
     @IBAction func didPressAddBtn(_ sender: UIButton) {
+
+        let storyboard: UIStoryboard = UIStoryboard(name: "SearchView", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "destinationVC") as! SearchWeatherViewController
+        vc.modalPresentationStyle = .automatic
+        present(vc, animated: true, completion: nil)
     }
+
+    //MARK: Properties
 
     let viewModel = WeatherListViewModel()
     var items = [ WeatherEntity]()
@@ -47,6 +54,10 @@ extension WeatherListViewController: UITableViewDelegate, UITableViewDataSource 
         cell.tempLbl.text = String(items[indexPath.row].main?.feels_like ?? 0)
         
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 

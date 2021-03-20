@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Regular.otf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Search Weather View Controller-->
+        <scene sceneID="vSV-QT-EyD">
+            <objects>
+                <viewController storyboardIdentifier="destinationVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0eW-hM-Af5" customClass="SearchWeatherViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RbF-A6-X5Z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBC-bS-tDm">
+                                <rect key="frame" x="355" y="60.5" width="39" height="27.5"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1F-G9-c0i">
+                                <rect key="frame" x="20" y="64" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="dhk-Ah-ij2" customClass="SearchComponentView" customModule="Weather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="414" height="81"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ki-Xo-KDJ">
+                                        <rect key="frame" x="20" y="16" width="374" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-LA-LOQ">
+                                        <rect key="frame" x="28" y="16" width="326" height="48"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="sr_grey"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="dGd-ug-IOx"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="0eW-hM-Af5" id="ASd-S1-MAX"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIK-6i-zLq">
+                                        <rect key="frame" x="352" y="19" width="42" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="FUC-qI-FYQ"/>
+                                            <constraint firstAttribute="width" constant="42" id="Fwa-Yy-t0T"/>
+                                        </constraints>
+                                        <state key="normal" image="magnifyingglass" catalog="system"/>
+                                        <connections>
+                                            <action selector="searchButtonPressed:" destination="dhk-Ah-ij2" eventType="touchUpInside" id="f42-8k-1Lw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.90073844179999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="eWw-LA-LOQ" firstAttribute="bottom" secondItem="3Ki-Xo-KDJ" secondAttribute="bottom" id="0Wt-WL-55S"/>
+                                    <constraint firstItem="3Ki-Xo-KDJ" firstAttribute="leading" secondItem="dhk-Ah-ij2" secondAttribute="leading" constant="20" id="9dd-m1-hWu"/>
+                                    <constraint firstAttribute="trailing" secondItem="eWw-LA-LOQ" secondAttribute="trailing" constant="60" id="AI2-63-3wp"/>
+                                    <constraint firstItem="eWw-LA-LOQ" firstAttribute="centerY" secondItem="dhk-Ah-ij2" secondAttribute="centerY" id="AMo-aV-Mwu"/>
+                                    <constraint firstItem="eWw-LA-LOQ" firstAttribute="top" secondItem="3Ki-Xo-KDJ" secondAttribute="top" id="AVn-nN-AbU"/>
+                                    <constraint firstItem="eWw-LA-LOQ" firstAttribute="leading" secondItem="dhk-Ah-ij2" secondAttribute="leading" constant="28" id="DWk-il-102"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Ki-Xo-KDJ" secondAttribute="trailing" constant="20" id="RLm-d5-CYj"/>
+                                    <constraint firstAttribute="trailing" secondItem="mIK-6i-zLq" secondAttribute="trailing" constant="20" id="RtX-3M-wCf"/>
+                                    <constraint firstItem="eWw-LA-LOQ" firstAttribute="top" secondItem="dhk-Ah-ij2" secondAttribute="top" constant="16" id="fXe-uT-uGh"/>
+                                    <constraint firstItem="mIK-6i-zLq" firstAttribute="centerY" secondItem="dhk-Ah-ij2" secondAttribute="centerY" id="qLJ-XA-QzL"/>
+                                    <constraint firstAttribute="bottom" secondItem="eWw-LA-LOQ" secondAttribute="bottom" constant="16" id="xYX-UT-2MG"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="btnSearch" destination="mIK-6i-zLq" id="nbc-hq-dfo"/>
+                                    <outlet property="txtSearchField" destination="eWw-LA-LOQ" id="TQv-6O-7oG"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VkL-dk-EEG">
+                                <rect key="frame" x="0.0" y="188" width="414" height="708"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0eW-hM-Af5" id="QvE-6c-Lyt"/>
+                                    <outlet property="delegate" destination="0eW-hM-Af5" id="ejK-Ef-Spd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wrd-vA-GiL"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <constraints>
+                            <constraint firstItem="dhk-Ah-ij2" firstAttribute="top" secondItem="pBC-bS-tDm" secondAttribute="bottom" constant="20" id="3Zn-md-wHr"/>
+                            <constraint firstItem="pBC-bS-tDm" firstAttribute="centerY" secondItem="A1F-G9-c0i" secondAttribute="centerY" id="9a7-jy-ncc"/>
+                            <constraint firstItem="Wrd-vA-GiL" firstAttribute="trailing" secondItem="VkL-dk-EEG" secondAttribute="trailing" id="E35-aY-BEu"/>
+                            <constraint firstItem="Wrd-vA-GiL" firstAttribute="trailing" secondItem="A1F-G9-c0i" secondAttribute="trailing" constant="20" id="LYf-yL-B5M"/>
+                            <constraint firstItem="A1F-G9-c0i" firstAttribute="leading" secondItem="Wrd-vA-GiL" secondAttribute="leading" constant="20" id="dnG-Th-Q1c"/>
+                            <constraint firstItem="A1F-G9-c0i" firstAttribute="top" secondItem="Wrd-vA-GiL" secondAttribute="top" constant="20" id="hWK-NI-3tx"/>
+                            <constraint firstItem="Wrd-vA-GiL" firstAttribute="trailing" secondItem="pBC-bS-tDm" secondAttribute="trailing" constant="20" id="jqm-h4-ryg"/>
+                            <constraint firstItem="VkL-dk-EEG" firstAttribute="top" secondItem="dhk-Ah-ij2" secondAttribute="bottom" id="mxk-B3-uyY"/>
+                            <constraint firstItem="VkL-dk-EEG" firstAttribute="leading" secondItem="Wrd-vA-GiL" secondAttribute="leading" id="pgG-gh-M3p"/>
+                            <constraint firstAttribute="bottom" secondItem="VkL-dk-EEG" secondAttribute="bottom" id="xWV-2k-eai"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchView" destination="dhk-Ah-ij2" id="2eg-2r-Qph"/>
+                        <outlet property="tableView" destination="VkL-dk-EEG" id="oiC-WQ-bZS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rmy-yh-VSW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1849.2753623188407" y="-634.15178571428567"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <namedColor name="sr_grey">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
