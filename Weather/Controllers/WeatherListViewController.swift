@@ -17,6 +17,8 @@ class WeatherListViewController: UIViewController {
         let storyboard: UIStoryboard = UIStoryboard(name: "SearchView", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "destinationVC") as! SearchWeatherViewController
         vc.modalPresentationStyle = .automatic
+        vc.delegate = self
+
         present(vc, animated: true, completion: nil)
     }
 
@@ -64,6 +66,13 @@ extension WeatherListViewController: UITableViewDelegate, UITableViewDataSource 
 extension WeatherListViewController: WeatherInfoListProtocol {
     func getList(input: [WeatherEntity]) {
         self.items = input
+        self.tableView.reloadData()
+    }
+}
+
+extension WeatherListViewController: SearchWeatherViewDelegate {
+    func selectedCity(city: WeatherEntity) {
+        self.items.append(city)
         self.tableView.reloadData()
     }
 }

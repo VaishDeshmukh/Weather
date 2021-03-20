@@ -7,7 +7,9 @@
 
 import UIKit
 
-//TODO: add zip codes
+protocol SearchWeatherViewDelegate {
+    func selectedCity(city: WeatherEntity)
+}
 
 class SearchWeatherViewController: UIViewController {
 
@@ -17,9 +19,14 @@ class SearchWeatherViewController: UIViewController {
     var listOfCities = [LocationData]()
     var filteredList =  [LocationData]()
 
+    var delegate: SearchWeatherViewDelegate? = nil
+
+    let viewModel = SearchCityViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         searchView.delegate = self
+        viewModel.delegate = self
         fetchListOfCities()
         registerCells()
     }
@@ -54,7 +61,9 @@ extension SearchWeatherViewController: SearchComponentViewDelegate {
                 let isName = $0.name?.range(of:  searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                 return isCountry || isName
             }
+
             filteredList.append(contentsOf: result)
+
             self.tableView.reloadData()
         }
     }
@@ -70,17 +79,36 @@ extension SearchWeatherViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = filteredList[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherCell
-
-        if let name = item.name, let country = item.country {
-            cell.cityName.text = name + " , " + country
-        }
         cell.tempLbl.isHidden = true
         cell.accessoryType = .none
+
+        if filteredList.count > 0 {
+            let item = filteredList[indexPath.row]
+            if let name = item.name, let country = item.country {
+                cell.cityName.text = name + " , " + country
+            }
+        } else {
+            cell.cityName.text = "No results found"
+        }
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if filteredList.count > 0 {
+            let item = filteredList[indexPath.row]
+            if let id = item.id {
+                viewModel.fetchWeatherResponse(input: String(id))
+            }
+        }
+    }
 }
 
+extension SearchWeatherViewController: SearchCityViewDelegate {
+    func getCity(city: WeatherEntity) {
+        dismiss(animated: true) {
+            self.delegate?.selectedCity(city: city)
+        }
+    }
+}
