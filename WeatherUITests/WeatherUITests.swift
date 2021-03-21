@@ -2,7 +2,7 @@
 //  WeatherUITests.swift
 //  WeatherUITests
 //
-//  Created by Vaishnavi Deshmukh on 18/3/21.
+//  Created by Vaishnavi Deshmukh on 21/3/21.
 //
 
 import XCTest
@@ -22,10 +22,24 @@ class WeatherUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testAddingCity() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+
+        let addBtn = app.buttons["add"]
+        let searchBtn = app.textFields["Search"]
+        let placeholder = app.textFields.staticTexts["Search"]
+        let search = app.textFields.staticTexts["Sydney"]
+        let result = app.tables.staticTexts["Sydney River , CA"]
+
+        if addBtn.isSelected {
+            XCTAssertTrue(placeholder.exists)
+        }
+
+        if search.exists && searchBtn.isSelected{
+            XCTAssertTrue(result.exists)
+        }
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
