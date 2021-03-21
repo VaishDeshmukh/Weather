@@ -17,6 +17,7 @@ protocol SearchComponentViewDelegate : class {
 class SearchComponentView : UIView {
     @IBOutlet weak var txtSearchField: UITextField!
     @IBOutlet weak var btnSearch: UIButton!
+    @IBOutlet weak var searchView: UIView!
 
     weak var delegate : SearchComponentViewDelegate? = nil
 
@@ -26,6 +27,9 @@ class SearchComponentView : UIView {
 
     override func awakeFromNib() {
         txtSearchField.delegate = self
+        searchView.layer.cornerRadius = 8
+        searchView.layer.borderWidth = 1
+        searchView.layer.borderColor = UIColor.lightGray.cgColor
     }
 }
 

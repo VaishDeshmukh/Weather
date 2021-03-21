@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct WeatherEntity : Codable {
 
@@ -22,6 +23,18 @@ struct WeatherEntity : Codable {
     var id: Int?
     var name: String?
     var cod: Int?
+
+    func associatedTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        formatter.timeZone = TimeZone(secondsFromGMT: timezone!)
+
+        return formatter.string(from: Date())
+    }
+    func associatedCity() -> String {
+        guard let name = name, let country = sys?.country else { return "" }
+        return name + ", " + country
+    }
 }
 
 struct MapCoordinate: Codable {
@@ -34,6 +47,68 @@ struct Weather: Codable {
     var main: String? //rain, snow, extreme
     var description: String?
     var icon: String?
+
+    func associatedImageUrl() -> String {
+        var path = Constants.imageUrl
+        if let id = icon {
+            path.append(id)
+            path.append("@2x.png")
+        }
+        return path
+    }
+
+    func dayOrNightImg() -> UIImage? {
+        guard let icon = icon else {return UIImage()}
+
+        if icon.contains("d") {
+            return UIImage(named: "sunny")
+        } else if icon.contains("n") {
+            return UIImage(named: "night")
+        }
+        
+        return nil
+    }
+
+    func associatedCondition() -> WeatherCode {
+        guard let id = id else { return .Clear}
+        return WeatherCode.getVal(val: id)
+    }
+
+    func associatedWaetherConditionImage() -> UIImage? {
+        switch associatedCondition() {
+            case .Thunderstorm: return UIImage(named: "thunderstorm")
+            case .Drizzle: return UIImage(named: "drizzle")
+            case .Rain: return UIImage(named: "rain")
+            case .Snow: return UIImage(named: "snow")
+            case .Atmosphere: return UIImage(named: "clear")
+            case .Clear: return UIImage(named: "clear")
+            case .Clouds: return UIImage(named: "clouds")
+        }
+    }
+
+    enum WeatherCode  {
+        case Thunderstorm
+        case Drizzle
+        case Rain
+        case Snow
+        case Atmosphere
+        case Clear
+        case Clouds
+
+        static func getVal(val: Int) -> Self {
+
+            switch val {
+                case 200...299: return.Thunderstorm
+                case 300...399: return.Drizzle
+                case 500...599: return.Rain
+                case 600...699: return.Snow
+                case 700...799: return.Atmosphere
+                case 800...800: return.Clear
+                case 801...899: return.Clouds
+                default: return .Clear
+            }
+        }
+    }
 }
 
 struct Temperature: Codable {
@@ -45,6 +120,12 @@ struct Temperature: Codable {
     var humidity: Double? // %
     var sea_level: Double?
     var grnd_level: Double?
+
+    func assocoatedTemp() -> String {
+        guard let temp = feels_like else {return ""}
+        let idx = Int(temp)
+        return String(idx) + String("\u{00B0}") + "C"
+    }
 }
 
 struct Wind: Codable {

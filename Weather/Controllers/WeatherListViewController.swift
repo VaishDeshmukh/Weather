@@ -52,8 +52,13 @@ extension WeatherListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherCell
-        cell.cityName.text = items[indexPath.row].name ?? ""
-        cell.tempLbl.text = String(items[indexPath.row].main?.feels_like ?? 0)
+
+        let item = items[indexPath.row]
+
+        cell.cityName.text = item.associatedCity()
+        cell.tempLbl.text = item.main?.assocoatedTemp()
+        cell.imgView.image = item.weather?.first?.dayOrNightImg()
+        cell.timeLbl.text = item.associatedTime()
         
         return cell
     }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Result<T> {
     case success(T)
@@ -58,6 +59,20 @@ class StaticData {
                 let decoder = JSONDecoder.init()
                 if let cities = try? decoder.decode([CityList].self, from: data) {
                     self.cities = cities
+                }
+            }
+        }
+    }
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
                 }
             }
         }
