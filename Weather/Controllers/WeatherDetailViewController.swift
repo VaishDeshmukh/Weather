@@ -21,6 +21,7 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var tempMaxLbl: UILabel!
     @IBOutlet weak var tempMinLbl: UILabel!
 
+    @IBOutlet weak var currentTime: UILabel!
     @IBAction func didPressBackBtn(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -36,8 +37,9 @@ class WeatherDetailViewController: UIViewController {
         }
 
         cityNameLbl.text = entity.name ?? ""
-        weatherDesc.text = entity.weather?.first?.description ?? ""
-
+        weatherDesc.text = entity.weather?.first?.description?.capitalized ?? ""
+        currentTime.text = entity.timezone?.associatedTimeZone()
+        
         if let timezone = entity.timezone?.associatedTimeZone(),
            let sunriseTime = entity.sys?.sunrise,
            let sunsetTime = entity.sys?.sunset {
