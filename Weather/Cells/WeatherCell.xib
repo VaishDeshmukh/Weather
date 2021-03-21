@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="89" id="KGk-i7-Jjw" customClass="WeatherCell" customModule="Weather" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="89" id="KGk-i7-Jjw" customClass="WeatherCell" customModule="Weather" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="317" height="89"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -23,6 +23,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="317" height="89"/>
                         <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uxZ-Uh-fZG" customClass="SpinnerView" customModule="Weather">
+                        <rect key="frame" x="148.5" y="34.5" width="20" height="20"/>
+                    </activityIndicatorView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGR-aZ-JbT">
                         <rect key="frame" x="15" y="46.5" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -52,6 +55,8 @@
                     <constraint firstItem="eGR-aZ-JbT" firstAttribute="leading" secondItem="eBU-su-q08" secondAttribute="leading" id="HCg-ey-c8R"/>
                     <constraint firstItem="eGR-aZ-JbT" firstAttribute="trailing" secondItem="eBU-su-q08" secondAttribute="trailing" id="HsQ-W2-TE9"/>
                     <constraint firstAttribute="bottom" secondItem="XAQ-x7-ULF" secondAttribute="bottom" id="KuH-8S-eot"/>
+                    <constraint firstItem="uxZ-Uh-fZG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Mo5-Mw-isA"/>
+                    <constraint firstItem="uxZ-Uh-fZG" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="PAW-RU-YdA"/>
                     <constraint firstItem="tkM-6f-cfO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QoG-Ge-ZjC"/>
                     <constraint firstItem="9Uw-my-O3p" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QtU-DE-XXY"/>
                     <constraint firstAttribute="trailing" secondItem="XAQ-x7-ULF" secondAttribute="trailing" id="TcR-HU-K0w"/>
@@ -68,6 +73,7 @@
             <connections>
                 <outlet property="cityName" destination="eBU-su-q08" id="WgW-ed-cMP"/>
                 <outlet property="imgView" destination="9Uw-my-O3p" id="vFJ-7U-Hso"/>
+                <outlet property="spinner" destination="uxZ-Uh-fZG" id="xLM-qH-UZH"/>
                 <outlet property="tempLbl" destination="tkM-6f-cfO" id="6o0-Zp-Shk"/>
                 <outlet property="timeLbl" destination="eGR-aZ-JbT" id="pUZ-DF-b8o"/>
             </connections>

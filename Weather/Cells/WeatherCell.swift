@@ -13,7 +13,8 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak var tempLbl: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var timeLbl: UILabel!
-
+    @IBOutlet weak var spinner: SpinnerView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,6 +30,7 @@ class WeatherCell: UITableViewCell {
 
     
 }
+
 extension UIImageView{
     func setImage(_ image: UIImage?, animated: Bool = true) {
         let duration = animated ? 0.3 : 0.0

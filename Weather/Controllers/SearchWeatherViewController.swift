@@ -16,6 +16,9 @@ class SearchWeatherViewController: UIViewController {
     @IBOutlet weak var searchView: SearchComponentView!
     @IBOutlet weak var tableView: UITableView!
 
+    @IBAction func didPressCloseBtn(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     var listOfCities = [LocationData]()
     var filteredList =  [LocationData]()
 
@@ -83,6 +86,7 @@ extension SearchWeatherViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherCell
         cell.tempLbl.isHidden = true
         cell.accessoryType = .none
+        cell.backgroundColor = .clear
 
         if filteredList.count > 0 {
             let item = filteredList[indexPath.row]

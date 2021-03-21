@@ -78,3 +78,31 @@ extension UIImageView {
         }
     }
 }
+
+extension Double {
+    func associatedTemp() -> String {
+        let idx = Int(self)
+        return String(idx) + String("\u{00B0}") + "C"
+    }
+}
+
+extension Int {
+    func associatedTimeZone() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        formatter.timeZone = TimeZone(secondsFromGMT: self)
+
+        return formatter.string(from: Date())
+    }
+}
+
+func sunTimeCoverter(unixTimeValue: Double, timezone: String) -> String {
+  let dateAndTime = NSDate(timeIntervalSince1970: unixTimeValue)
+  let dateFormater = DateFormatter()
+  dateFormater.dateStyle = .none
+  dateFormater.timeStyle = .short
+  dateFormater.timeZone = TimeZone(abbreviation: timezone)
+  dateFormater.locale = Locale.autoupdatingCurrent
+  let currentdateAndTime = dateFormater.string(from: dateAndTime as Date)
+  return currentdateAndTime
+}

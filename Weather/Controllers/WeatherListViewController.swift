@@ -11,6 +11,7 @@ class WeatherListViewController: UIViewController {
 
 
     //MARK: Outlets & Actions
+    @IBOutlet weak var spinner: SpinnerView!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func didPressAddBtn(_ sender: UIButton) {
 
@@ -26,13 +27,15 @@ class WeatherListViewController: UIViewController {
 
     let viewModel = WeatherListViewModel()
     var items = [ WeatherEntity]()
-
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        spinner.color = .red
+
         registerCells()
         viewModel.initialSetup()
+
         viewModel.delegate = self
         tableView.tableFooterView = UIView()
 
@@ -56,9 +59,9 @@ extension WeatherListViewController: UITableViewDelegate, UITableViewDataSource 
         let item = items[indexPath.row]
 
         cell.cityName.text = item.associatedCity()
-        cell.tempLbl.text = item.main?.assocoatedTemp()
-        cell.imgView.image = item.weather?.first?.dayOrNightImg()
-        cell.timeLbl.text = item.associatedTime()
+        cell.tempLbl.text = item.main?.temp?.associatedTemp()
+        cell.imgView.image = item.getImageForWeatherDetail()
+        cell.timeLbl.text = item.timezone?.associatedTimeZone()
         
         return cell
     }
@@ -68,14 +71,23 @@ extension WeatherListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(items[indexPath.row])
+        let storyboard: UIStoryboard = UIStoryboard(name: "WeatherDetail", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "weatherDetailViewController") as! WeatherDetailViewController
+        vc.modalPresentationStyle = .overFullScreen
+        vc.entity = items[indexPath.row]
+        present(vc, animated: true, completion: nil)
     }
 }
 
 extension WeatherListViewController: WeatherInfoListProtocol {
     func getList(input: [WeatherEntity]) {
+        spinner.startAnimating()
         self.items = input
-        self.tableView.reloadData()
+
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.tableView.reloadData()
+        }
     }
 }
 

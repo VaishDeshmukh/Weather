@@ -14,7 +14,7 @@ struct Constants {
     static let baseURL = "api.openweathermap.org/data/2.5/weather"
     static let errorJSONParsingDescription = "Failed to parse JSON while conversion"
     static let domainData = "Data"
-    static let imageUrl = "http://openweathermap.org/img/wn/"
+    static let imageUrl = "https://openweathermap.org/img/wn/"
 }
 
 

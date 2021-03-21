@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol WeatherListViewModelProtocol {
     func fetchListOfCities(input: [String])
@@ -22,6 +23,8 @@ class WeatherListViewModel : WeatherListViewModelProtocol {
 
     var delegate: WeatherInfoListProtocol?
 
+    var view: WeatherListViewController?
+
     func initialSetup() {
 
         // Get the weather for Sydney, Melbourne & Brisbane
@@ -31,19 +34,24 @@ class WeatherListViewModel : WeatherListViewModelProtocol {
         listOfCities.append(City.Melbourne.associatedCityId())
         listOfCities.append(City.Brisbane.associatedCityId())
         fetchListOfCities(input: listOfCities)
-
     }
 
     func fetchListOfCities(input: [String]) {
         var payload: [String: String] = [:]
         payload.updateValue( Constants.apiKey , forKey: Constants.appId)
         payload.updateValue("metric", forKey: "units")
-        
+
+        view?.spinner.startAnimating()
+
         for (_, val) in input.enumerated() {
 
             payload.updateValue(val, forKey: "id")
 
             WeatherEntity.fetch(data: payload) { (data, error) in
+                DispatchQueue.main.async {
+                    self.view?.spinner.stopAnimating()
+                }
+                
                 if let item = data {
                     DispatchQueue.main.async {
                         self.weatherList.append(item)

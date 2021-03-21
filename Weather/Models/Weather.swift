@@ -24,16 +24,42 @@ struct WeatherEntity : Codable {
     var name: String?
     var cod: Int?
 
-    func associatedTime() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm a"
-        formatter.timeZone = TimeZone(secondsFromGMT: timezone!)
-
-        return formatter.string(from: Date())
-    }
     func associatedCity() -> String {
         guard let name = name, let country = sys?.country else { return "" }
         return name + ", " + country
+    }
+
+    func getImageForWeatherDetail() -> UIImage? {
+
+        var dayImage = UIImage()
+        var nightImage = UIImage()
+
+        let isDay = timezone?.associatedTimeZone().contains("AM") ?? false
+
+        guard let cityWeather = weather?.first else { return nil}
+        switch cityWeather.associatedCondition() {
+            case .Thunderstorm:
+                dayImage = UIImage(named: "thunderNight") ?? UIImage()
+                nightImage = UIImage(named: "thunderDay") ?? UIImage()
+            case .Drizzle:
+                dayImage = UIImage(named: "drizzleDay") ?? UIImage()
+                nightImage = UIImage(named: "drizzleDay") ?? UIImage()
+            case .Rain:
+                dayImage = UIImage(named: "rainDay") ?? UIImage()
+                nightImage = UIImage(named: "rainNight") ?? UIImage()
+            case .Snow:
+                dayImage = UIImage(named: "snowDay") ?? UIImage()
+                nightImage = UIImage(named: "snowNight") ?? UIImage()
+            case .Clouds:
+                dayImage = UIImage(named: "cloudsDay") ?? UIImage()
+                nightImage = UIImage(named: "clouds") ?? UIImage()
+            case .Atmosphere: fallthrough
+            case .Clear:
+                dayImage = UIImage(named: "clearDay") ?? UIImage()
+                nightImage = UIImage(named: "clearNight") ?? UIImage()
+        }
+
+        return isDay ? dayImage : nightImage
     }
 }
 
@@ -121,10 +147,19 @@ struct Temperature: Codable {
     var sea_level: Double?
     var grnd_level: Double?
 
-    func assocoatedTemp() -> String {
-        guard let temp = feels_like else {return ""}
-        let idx = Int(temp)
-        return String(idx) + String("\u{00B0}") + "C"
+    func getHumidity() -> String {
+        guard let hum = humidity else {
+            return "-"
+        }
+        return String(hum) + "%"
+    }
+
+    func getPressure() -> String {
+        guard let press = pressure else {
+            return "-"
+        }
+        return String(press) + "hPA"
+
     }
 }
 
@@ -132,6 +167,13 @@ struct Wind: Codable {
     var speed: Double? //def: meter/sec, metric: meter/sec, imperial: miles/hour
     var deg: Double? //degrees
     var gust: Double? //same as speed
+
+    func getWindSpeed() -> String {
+        guard let wind = speed else {
+            return "-"
+        }
+        return String(wind) + "m/sec"
+    }
 }
 
 struct Clouds: Codable {
