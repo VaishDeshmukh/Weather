@@ -83,20 +83,34 @@ extension SearchWeatherViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherCell
-        cell.tempLbl.isHidden = true
-        cell.accessoryType = .none
-        cell.backgroundColor = .clear
 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "single-cell", for: indexPath)
         if filteredList.count > 0 {
             let item = filteredList[indexPath.row]
             if let name = item.name, let country = item.country {
-                cell.cityName.text = name + " , " + country
+                cell.textLabel?.text = name + " , " + country
             }
         } else {
-            cell.cityName.text = "No results found"
+            cell.textLabel?.text = "No results found"
         }
+
         return cell
+
+
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherCell
+//        cell.tempLbl.isHidden = true
+//        cell.accessoryType = .none
+//        cell.backgroundColor = .clear
+//
+//        if filteredList.count > 0 {
+//            let item = filteredList[indexPath.row]
+//            if let name = item.name, let country = item.country {
+//                cell.cityName.text = name + " , " + country
+//            }
+//        } else {
+//            cell.cityName.text = "No results found"
+//        }
+//        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

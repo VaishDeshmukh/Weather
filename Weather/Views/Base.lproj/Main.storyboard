@@ -23,10 +23,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awh-cI-iFq">
-                                        <rect key="frame" x="331" y="56" width="24" height="24"/>
+                                        <rect key="frame" x="305" y="25" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="IvN-W5-EgG"/>
-                                            <constraint firstAttribute="height" constant="24" id="hY5-Ie-pcf"/>
+                                            <constraint firstAttribute="width" constant="50" id="IvN-W5-EgG"/>
+                                            <constraint firstAttribute="height" constant="50" id="hY5-Ie-pcf"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="plus" catalog="system"/>
@@ -35,7 +35,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-lh-PZR">
-                                        <rect key="frame" x="126" y="39" width="123" height="41"/>
+                                        <rect key="frame" x="75" y="29.5" width="225" height="41"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,9 +46,11 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="awh-cI-iFq" secondAttribute="trailing" constant="20" id="4W1-Vh-chO"/>
                                     <constraint firstItem="8vS-lh-PZR" firstAttribute="centerX" secondItem="7EO-MQ-Gdc" secondAttribute="centerX" id="BQI-Up-Rdy"/>
+                                    <constraint firstItem="awh-cI-iFq" firstAttribute="leading" secondItem="8vS-lh-PZR" secondAttribute="trailing" constant="5" id="DGQ-Jw-U3H"/>
                                     <constraint firstAttribute="height" constant="100" id="Hgz-cz-IYU"/>
-                                    <constraint firstAttribute="bottom" secondItem="awh-cI-iFq" secondAttribute="bottom" constant="20" id="IFm-sh-Uxa"/>
-                                    <constraint firstItem="8vS-lh-PZR" firstAttribute="bottom" secondItem="awh-cI-iFq" secondAttribute="bottom" id="fBU-KD-vTo"/>
+                                    <constraint firstItem="awh-cI-iFq" firstAttribute="centerY" secondItem="8vS-lh-PZR" secondAttribute="centerY" id="bYh-Ae-lJQ"/>
+                                    <constraint firstItem="8vS-lh-PZR" firstAttribute="centerX" secondItem="7EO-MQ-Gdc" secondAttribute="centerX" id="pj0-lK-nnK"/>
+                                    <constraint firstItem="8vS-lh-PZR" firstAttribute="centerY" secondItem="7EO-MQ-Gdc" secondAttribute="centerY" id="yVM-Un-hLu"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y9E-4N-wGJ">
