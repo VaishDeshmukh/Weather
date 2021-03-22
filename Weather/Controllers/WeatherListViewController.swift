@@ -17,7 +17,7 @@ class WeatherListViewController: UIViewController {
 
         let storyboard: UIStoryboard = UIStoryboard(name: "SearchView", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "destinationVC") as! SearchWeatherViewController
-        vc.modalPresentationStyle = .automatic
+        vc.modalPresentationStyle = .overFullScreen
         vc.delegate = self
 
         present(vc, animated: true, completion: nil)
