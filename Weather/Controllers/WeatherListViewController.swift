@@ -28,6 +28,7 @@ class WeatherListViewController: UIViewController {
     let viewModel = WeatherListViewModel()
     var items = [ WeatherEntity]()
     //MARK: Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,10 +39,31 @@ class WeatherListViewController: UIViewController {
 
         viewModel.delegate = self
         tableView.tableFooterView = UIView()
+        pauseUpdates()
+        resumeUpdates()
 
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        pauseUpdates()
+    }
+
+    var pollTimer: Timer? = nil
+    
+    func resumeUpdates() {
+
+        let interval = 5.0
+        pollTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { [weak self] _ in
+            self?.tableView.reloadData()
+        })
+    }
+
+    func pauseUpdates() {
+        pollTimer?.invalidate()
+        pollTimer = nil
+    }
     func registerCells() {
         let infoCell = UINib(nibName: "WeatherCell", bundle: Bundle.main)
         tableView.register(infoCell, forCellReuseIdentifier: "cell")
